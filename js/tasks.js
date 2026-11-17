@@ -93,6 +93,24 @@ function deleteTask(id) {
 }
 
 
+// move the task with this id to another column (called by dragdrop.js)
+function moveTask(id, newStatus) {
+  // MODERN: find() returns the first task whose id matches (or undefined).
+  // The course would loop with for and an if inside.
+  const task = tasks.find(task => task.id === id);
+
+  // stop if the task was not found, or it was dropped on its own column
+  if (!task || task.status === newStatus) {
+    return;
+  }
+
+  // change its column, save, and redraw (the array is the truth!)
+  task.status = newStatus;
+  saveTasks();
+  renderBoard();
+}
+
+
 /* ===================== Drawing the board ===================== */
 
 // build the HTML element (a "card") for one task
@@ -138,6 +156,9 @@ function createTaskCard(task) {
   card.appendChild(title);
   card.appendChild(meta);
 
+  // let the card be dragged to another column (function is in dragdrop.js)
+  makeCardDraggable(card, task);
+
   return card;
 }
 
@@ -166,7 +187,7 @@ function renderBoard() {
     if (columnTasks.length === 0) {
       const empty = document.createElement("p");
       empty.className = "empty-message";
-      empty.textContent = "Nothing here yet ✨";
+      empty.textContent = "Nothing here yet \u2728";
       list.appendChild(empty);
     }
 
@@ -190,6 +211,7 @@ function formatDate(isoDate) {
 // after the whole page is built - no need for <body onLoad="...">.
 loadTasks();
 renderBoard();
+setupDragAndDrop();   // from dragdrop.js
 
 // MODERN: addEventListener("submit", ...) instead of onSubmit="..." in the HTML
 document.getElementById("taskForm").addEventListener("submit", addTask);

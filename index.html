@@ -22,6 +22,8 @@
     whole page is built. That lets us keep scripts in the <head> (like the course
     rule) without the "element is null" problem, and with no need for onLoad.
   -->
+  <!-- order matters: dragdrop.js first, because tasks.js uses its functions -->
+  <script src="js/dragdrop.js" defer></script>
   <script src="js/tasks.js" defer></script>
 </head>
 <body>

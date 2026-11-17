@@ -271,6 +271,27 @@ form .btn {
   color: var(--danger);
 }
 
+/* ===== Drag and drop (Stage 3) ===== */
+.task-card[draggable="true"] {
+  cursor: grab;
+}
+
+/* the card being dragged is faded */
+.task-card.dragging {
+  opacity: 0.4;
+}
+
+/* the column under the dragged card is highlighted */
+.column {
+  transition: background-color 0.15s ease, outline-color 0.15s ease;
+  outline: 2px dashed transparent;
+}
+
+.column.drag-over {
+  background: #e0e7ff;
+  outline-color: var(--primary);
+}
+
 .empty-message {
   color: var(--muted);
   font-size: 14px;
