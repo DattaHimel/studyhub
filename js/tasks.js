@@ -166,7 +166,7 @@ function renderBoard() {
     if (columnTasks.length === 0) {
       const empty = document.createElement("p");
       empty.className = "empty-message";
-      empty.textContent = "No tasks";
+      empty.textContent = "Nothing here yet ✨";
       list.appendChild(empty);
     }
 
