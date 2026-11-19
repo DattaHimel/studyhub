@@ -26,6 +26,7 @@
   <script src="js/dragdrop.js" defer></script>
   <script src="js/validation.js" defer></script>
   <script src="js/tasks.js" defer></script>
+  <script src="js/timer.js" defer></script>
 </head>
 <body>
 
@@ -66,7 +67,7 @@
             <option value="low">Low</option>
             <option value="medium" selected>Medium</option>
             <option value="high">High</option>
-          </selegit statusct>
+          </select>
 
           <button type="submit" class="btn btn-primary">Add task</button>
         </form>
@@ -81,6 +82,8 @@
           <button class="btn" id="stopTimer">Stop</button>
           <button class="btn" id="resetTimer">Reset</button>
         </div>
+        <p class="timer-message" id="timerMessage"></p>
+        <p class="session-count muted" id="sessionCount"></p>
       </section>
 
       <!-- Weather widget (course topic: AJAX + JSON) -->

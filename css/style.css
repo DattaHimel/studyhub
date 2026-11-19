@@ -186,6 +186,32 @@ form .btn {
   flex: 1;
 }
 
+/* timer messages (Stage 5) */
+.timer-message {
+  text-align: center;
+  font-weight: 600;
+  min-height: 20px;
+  margin: 14px 0 4px;
+}
+
+.session-count {
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* while the timer runs, the time turns purple and gently pulses
+   (course topic: CSS animation / transitions) */
+#timerCard.running .timer-display {
+  color: var(--primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
 /* ===== Kanban board ===== */
 .board {
   display: grid;
