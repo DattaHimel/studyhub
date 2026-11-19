@@ -54,8 +54,8 @@ function addTask(event) {
   const due = document.getElementById("taskDue").value;
   const priority = document.getElementById("taskPriority").value;
 
-  // do nothing if the title is empty (full validation comes in Stage 4)
-  if (title === "") {
+  // check the form first (validation.js); stop if anything is wrong
+  if (!validateTaskForm()) {
     return;
   }
 
@@ -212,6 +212,7 @@ function formatDate(isoDate) {
 loadTasks();
 renderBoard();
 setupDragAndDrop();   // from dragdrop.js
+setupValidation();    // from validation.js
 
 // MODERN: addEventListener("submit", ...) instead of onSubmit="..." in the HTML
 document.getElementById("taskForm").addEventListener("submit", addTask);

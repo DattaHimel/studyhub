@@ -22,8 +22,9 @@
     whole page is built. That lets us keep scripts in the <head> (like the course
     rule) without the "element is null" problem, and with no need for onLoad.
   -->
-  <!-- order matters: dragdrop.js first, because tasks.js uses its functions -->
+  <!-- order matters: helper files first, because tasks.js uses their functions -->
   <script src="js/dragdrop.js" defer></script>
+  <script src="js/validation.js" defer></script>
   <script src="js/tasks.js" defer></script>
 </head>
 <body>
@@ -46,6 +47,11 @@
       <!-- Add-task form (course topics: web forms + form validation) -->
       <section class="card" id="addTaskCard">
         <h2>Add a task</h2>
+        <!--
+          novalidate turns OFF the browser's built-in pop-up checks
+          (course: required, maxlength ...) so we can show our own
+          friendly red messages with JavaScript instead.
+        -->
         <form id="taskForm" novalidate>
           <label for="taskTitle">Task</label>
           <input type="text" id="taskTitle" placeholder="e.g. Finish CSIT884 assignment" />
@@ -60,7 +66,7 @@
             <option value="low">Low</option>
             <option value="medium" selected>Medium</option>
             <option value="high">High</option>
-          </select>
+          </selegit statusct>
 
           <button type="submit" class="btn btn-primary">Add task</button>
         </form>

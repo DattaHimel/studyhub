@@ -123,6 +123,12 @@ form select:focus {
   border-color: transparent;
 }
 
+/* a field with an error gets a red border (Stage 4) */
+form input.invalid {
+  border-color: var(--danger);
+  background: #fef2f2;
+}
+
 .error {
   display: block;
   color: var(--danger);
