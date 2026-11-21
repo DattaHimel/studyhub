@@ -333,8 +333,9 @@ form .btn {
 
 /* ===== Chart ===== */
 #progressChart {
+  display: block;
   width: 100%;
-  height: auto;
+  height: 200px;   /* chart.js reads this size and draws to fit it */
 }
 
 /* ===== Footer ===== */
