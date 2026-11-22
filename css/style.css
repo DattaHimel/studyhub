@@ -338,6 +338,64 @@ form .btn {
   height: 200px;   /* chart.js reads this size and draws to fit it */
 }
 
+/* ===== Weather (Stage 7) ===== */
+.weather-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.weather-controls select {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  background: white;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weather-emoji {
+  font-size: 44px;
+}
+
+.weather-temp {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.weather-details {
+  margin: 8px 0 0;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.weather-credit {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.weather-credit a {
+  color: var(--muted);
+}
+
+/* hides a label visually but keeps it for screen readers (accessibility) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
 /* ===== Footer ===== */
 .site-footer {
   text-align: center;

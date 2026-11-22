@@ -28,6 +28,7 @@
   <script src="js/chart.js" defer></script>
   <script src="js/tasks.js" defer></script>
   <script src="js/timer.js" defer></script>
+  <script src="js/weather.js" defer></script>
 </head>
 <body>
 
@@ -90,7 +91,13 @@
       <!-- Weather widget (course topic: AJAX + JSON) -->
       <section class="card" id="weatherCard">
         <h2>Weather</h2>
+        <div class="weather-controls">
+          <label for="citySelect" class="visually-hidden">City</label>
+          <select id="citySelect"></select>
+          <button class="btn" id="locationButton" title="Use my location">&#128205; Me</button>
+        </div>
         <div id="weatherDisplay" class="muted">Weather will appear here.</div>
+        <p class="weather-credit">Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>
       </section>
 
     </aside>
