@@ -2,7 +2,7 @@
 
 A study dashboard for university students: plan tasks on a drag-and-drop Kanban board, focus with a Pomodoro timer, track progress on a live chart and check the weather. Everything is built with **plain HTML, CSS and JavaScript, with no frameworks or libraries**.
 
-**🔗 Live demo:** https://YOUR-GITHUB-USERNAME.github.io/studyhub/
+**🔗 Live demo:** https://DattaHimel.github.io/studyhub/
 
 ![StudyHub dashboard in light mode](screenshots/desktop-light.png)
 
@@ -92,7 +92,7 @@ studyhub/
 
 1. Download or clone this repository:
    ```
-   git clone https://github.com/YOUR-GITHUB-USERNAME/studyhub.git
+   git clone https://github.com/DattaHimel/studyhub.git
    ```
 2. Open the folder in VS Code and start it with the **Live Server** extension (or any local web server).
    The weather widget needs a web server; opening `index.html` directly from a file may block it.
@@ -118,8 +118,8 @@ Or paste the exported file and the schema into any online XSD validator.
 
 **Himel Datta**, Master's student at the University of Wollongong
 
-- LinkedIn: https://www.linkedin.com/in/YOUR-LINKEDIN/
-- GitHub: https://github.com/YOUR-GITHUB-USERNAME
+- LinkedIn: https://www.linkedin.com/in/https://github.com/DattaHimel/
+- GitHub: https://github.com/DattaHimel
 
 Weather data by [Open-Meteo.com](https://open-meteo.com/) (CC BY 4.0).
 
