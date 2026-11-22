@@ -29,6 +29,7 @@
   <script src="js/tasks.js" defer></script>
   <script src="js/timer.js" defer></script>
   <script src="js/weather.js" defer></script>
+  <script src="js/export.js" defer></script>
 </head>
 <body>
 
@@ -98,6 +99,16 @@
         </div>
         <div id="weatherDisplay" class="muted">Weather will appear here.</div>
         <p class="weather-credit">Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>
+      </section>
+
+      <!-- Export (course topics: XML + XSD, JSON) -->
+      <section class="card" id="exportCard">
+        <h2>Export your tasks</h2>
+        <div class="button-row">
+          <button class="btn" id="exportXml">Export XML</button>
+          <button class="btn" id="exportJson">Export JSON</button>
+        </div>
+        <p class="muted export-message" id="exportMessage"></p>
       </section>
 
     </aside>

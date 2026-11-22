@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  studyhub-tasks.xsd - the schema (rules) for the XML file that StudyHub exports.
+
+  Course topic: XSD (week 7). Written in the same style as the lecture:
+  the definitions are nested inside the root element, attributes come after
+  </xsd:sequence>, and value limits use xsd:restriction.
+
+  Rules:
+    - the root <taskList> has an exportDate attribute (a date)
+    - it holds zero or more <task> elements
+    - each <task> has:
+        attributes  id (positive whole number), status, priority
+        elements    <title> (1-60 characters), then an optional <due> (a date)
+    - status must be todo, doing or done
+    - priority must be low, medium or high
+
+  To check an exported file: paste the exported XML and this schema into an
+  online XSD validator (search "XSD validator"), or use the xmllint tool.
+  (The xmllint command is in the README, because an XML comment is not
+   allowed to contain two hyphens in a row.)
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="taskList">
+    <xsd:complexType>
+      <xsd:sequence>
+
+        <xsd:element name="task" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+
+              <!-- the task name: 1 to 60 characters -->
+              <xsd:element name="title">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="60"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+
+              <!-- the due date is optional -->
+              <xsd:element name="due" type="xsd:date" minOccurs="0"/>
+
+            </xsd:sequence>
+
+            <!-- attributes come after the sequence (lecture style) -->
+            <xsd:attribute name="id" type="xsd:positiveInteger" use="required"/>
+
+            <xsd:attribute name="status" use="required">
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="todo"/>
+                  <xsd:enumeration value="doing"/>
+                  <xsd:enumeration value="done"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:attribute>
+
+            <xsd:attribute name="priority" use="required">
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:enumeration value="low"/>
+                  <xsd:enumeration value="medium"/>
+                  <xsd:enumeration value="high"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:attribute>
+
+          </xsd:complexType>
+        </xsd:element>
+
+      </xsd:sequence>
+
+      <xsd:attribute name="exportDate" type="xsd:date" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>

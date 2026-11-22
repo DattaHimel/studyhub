@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskList exportDate="2026-11-22" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="studyhub-tasks.xsd">
+  <task id="1795346786850" status="todo" priority="high">
+    <title>Finish CSIT884 assignment</title>
+    <due>2026-12-01</due>
+  </task>
+  <task id="1795346786963" status="done" priority="low">
+    <title>Fish &amp; Chips &lt;3 "quotes"</title>
+  </task>
+  <task id="1795346787031" status="todo" priority="medium">
+    <title>Revise XML and XSD</title>
+    <due>2026-12-05</due>
+  </task>
+</taskList>
