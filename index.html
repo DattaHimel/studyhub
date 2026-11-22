@@ -13,6 +13,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudyHub - Student Productivity Dashboard</title>
 
+  <!-- the little icon on the browser tab: an emoji drawn as an SVG image -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%93%9A</text></svg>" />
+  <meta name="description" content="StudyHub: a student productivity dashboard with a Kanban board, focus timer, progress chart and weather." />
+
+  <!-- theme.js has NO defer: it must run before the page is drawn (no white flash in dark mode) -->
+  <script src="js/theme.js"></script>
+
   <!-- External CSS file (course topic: the 3 ways to add CSS; external is best for a real project) -->
   <link rel="stylesheet" href="css/style.css" />
 
@@ -35,9 +42,13 @@
 
   <!-- ===== Header ===== -->
   <header class="site-header">
-    <div class="brand">
-      <span class="logo">&#128218;</span>
-      <h1>StudyHub</h1>
+    <div class="header-row">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">&#128218;</span>
+        <h1>StudyHub</h1>
+      </div>
+      <!-- dark mode switch (Stage 9) - theme.js sets its icon and label -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">&#127769;</button>
     </div>
     <p class="tagline">Plan your tasks, focus, and track your progress.</p>
   </header>
@@ -85,7 +96,7 @@
           <button class="btn" id="stopTimer">Stop</button>
           <button class="btn" id="resetTimer">Reset</button>
         </div>
-        <p class="timer-message" id="timerMessage"></p>
+        <p class="timer-message" id="timerMessage" aria-live="polite"></p>
         <p class="session-count muted" id="sessionCount"></p>
       </section>
 
@@ -97,7 +108,7 @@
           <select id="citySelect"></select>
           <button class="btn" id="locationButton" title="Use my location">&#128205; Me</button>
         </div>
-        <div id="weatherDisplay" class="muted">Weather will appear here.</div>
+        <div id="weatherDisplay" class="muted" aria-live="polite">Weather will appear here.</div>
         <p class="weather-credit">Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>
       </section>
 
@@ -108,7 +119,7 @@
           <button class="btn" id="exportXml">Export XML</button>
           <button class="btn" id="exportJson">Export JSON</button>
         </div>
-        <p class="muted export-message" id="exportMessage"></p>
+        <p class="muted export-message" id="exportMessage" aria-live="polite"></p>
       </section>
 
     </aside>
@@ -144,7 +155,7 @@
   </main>
 
   <footer class="site-footer">
-    Built with HTML, CSS and JavaScript &middot; CSIT884 portfolio project
+    Built with HTML, CSS and JavaScript (no frameworks) &middot; CSIT884 portfolio project
   </footer>
 
 </body>

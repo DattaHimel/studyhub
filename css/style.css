@@ -19,6 +19,36 @@
   --high: #ef4444;
   --radius: 12px;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  /* added in Stage 9 so dark mode can change them */
+  --column: #eef0f7;
+  --drop: #e0e7ff;
+  --danger-soft: #fee2e2;
+  --header: var(--primary);
+  --on-primary: white;      /* text colour on purple buttons */
+}
+
+/*
+  Dark mode (Stage 9).
+  theme.js puts data-theme="dark" on <html>. Because every colour in this file
+  uses var(--name), changing the variables here re-colours the whole page.
+*/
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #818cf8;
+  --primary-dark: #6366f1;
+  --border: #334155;
+  --danger: #f87171;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --column: #172033;
+  --drop: #312e81;
+  --danger-soft: #3f1d24;
+  --header: #312e81;
+  --on-primary: #0f172a;    /* dark text on the lighter purple, for contrast */
+  /* tells the browser to draw its own controls (date picker, scrollbars) dark too */
+  color-scheme: dark;
 }
 
 /* MODERN: box-sizing makes width include padding and border, so sizes are predictable */
@@ -31,6 +61,7 @@ body {
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2 {
@@ -39,7 +70,7 @@ h1, h2 {
 
 /* ===== Header ===== */
 .site-header {
-  background: var(--primary);
+  background: var(--header);
   color: white;
   padding: 20px 32px;
 }
@@ -52,6 +83,27 @@ h1, h2 {
 
 .logo {
   font-size: 32px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.theme-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .tagline {
@@ -113,7 +165,8 @@ form select {
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 15px;
-  background: white;
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
 }
 
@@ -126,7 +179,7 @@ form select:focus {
 /* a field with an error gets a red border (Stage 4) */
 form input.invalid {
   border-color: var(--danger);
-  background: #fef2f2;
+  background: var(--danger-soft);
 }
 
 .error {
@@ -142,7 +195,8 @@ form input.invalid {
   padding: 9px 16px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: white;
+  background: var(--card);
+  color: var(--text);
   font-size: 15px;
   cursor: pointer;
   /* course topic: CSS transitions (week 7) */
@@ -156,7 +210,7 @@ form input.invalid {
 .btn-primary {
   background: var(--primary);
   border-color: var(--primary);
-  color: white;
+  color: var(--on-primary);
 }
 
 .btn-primary:hover {
@@ -220,7 +274,7 @@ form .btn {
 }
 
 .column {
-  background: #eef0f7;
+  background: var(--column);
   border-radius: var(--radius);
   padding: 14px;
   min-height: 320px;
@@ -235,7 +289,7 @@ form .btn {
 }
 
 .count {
-  background: white;
+  background: var(--card);
   border-radius: 999px;
   padding: 2px 10px;
   font-size: 13px;
@@ -252,7 +306,7 @@ form .btn {
 /* ===== Task cards (Stage 2) ===== */
 .task-card {
   position: relative;
-  background: white;
+  background: var(--card);
   border-radius: 10px;
   padding: 12px 34px 12px 14px;
   box-shadow: var(--shadow);
@@ -299,7 +353,7 @@ form .btn {
 }
 
 .delete-btn:hover {
-  background: #fee2e2;
+  background: var(--danger-soft);
   color: var(--danger);
 }
 
@@ -320,7 +374,7 @@ form .btn {
 }
 
 .column.drag-over {
-  background: #e0e7ff;
+  background: var(--drop);
   outline-color: var(--primary);
 }
 
@@ -352,7 +406,8 @@ form .btn {
   border-radius: 8px;
   font-size: 15px;
   font-family: inherit;
-  background: white;
+  background: var(--card);
+  color: var(--text);
 }
 
 .weather-main {
@@ -403,6 +458,63 @@ form .btn {
   margin: 10px 0 0;
 }
 
+/* ===== Stage 9: move buttons on each card ===== */
+.move-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.move-btn {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 6px;
+  min-width: 36px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.move-btn:hover {
+  background: var(--column);
+}
+
+/* ===== Stage 9: a newly added card fades and slides in ===== */
+/* (dragdrop.js adds the is-new class only to a card created in the last second) */
+.task-card.is-new {
+  animation: card-in 0.25s ease-out;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Stage 9: accessibility ===== */
+/* a clear outline when you move around with the Tab key (not when clicking) */
+button:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* respect people who switch off animations in their system settings */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+a {
+  color: var(--primary);
+}
+
 /* ===== Footer ===== */
 .site-footer {
   text-align: center;
@@ -418,11 +530,45 @@ form .btn {
 */
 @media (max-width: 900px) {
   .dashboard {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     padding: 16px;
   }
 
+  /*
+    Stage 9: put the most important things first on a phone.
+    MODERN: "display: contents" makes the sidebar and content wrappers
+    disappear from the layout, so all the cards sit side by side in one list,
+    and "order" can then arrange them however we like.
+  */
+  .sidebar,
+  .content {
+    display: contents;
+  }
+
+  #addTaskCard { order: 1; }
+  .board       { order: 2; }
+  #chartCard   { order: 3; }
+  #timerCard   { order: 4; }
+  #weatherCard { order: 5; }
+  #exportCard  { order: 6; }
+
   .board {
     grid-template-columns: 1fr;
+  }
+
+  /* columns don't need to be tall on a phone */
+  .column,
+  .task-list {
+    min-height: 0;
+  }
+
+  .empty-message {
+    margin: 10px 0;
+  }
+
+  .site-header {
+    padding: 16px;
   }
 }

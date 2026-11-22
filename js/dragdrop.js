@@ -14,8 +14,68 @@
 */
 
 
-// make one task card draggable (called by createTaskCard in tasks.js)
+// the columns in order, used by the arrow buttons
+const COLUMN_ORDER = ["todo", "doing", "done"];
+
+// add the ← → buttons that move a card one column left or right.
+// Stage 9: HTML5 drag and drop does not work on touch screens,
+// so phones need buttons. They also help keyboard users.
+function addMoveButtons(card, task) {
+  const position = COLUMN_ORDER.indexOf(task.status);   // 0, 1 or 2
+
+  const row = document.createElement("div");
+  row.className = "move-row";
+
+  // the ← button (not shown in the first column)
+  if (position > 0) {
+    const left = document.createElement("button");
+    left.className = "move-btn";
+    left.textContent = "\u2190";                    // ←
+    // MODERN: aria-label tells screen readers what an icon-only button does
+    left.setAttribute("aria-label", "Move to " + columnName(COLUMN_ORDER[position - 1]));
+    left.title = left.getAttribute("aria-label");
+    left.addEventListener("click", function () {
+      moveTask(task.id, COLUMN_ORDER[position - 1]);   // moveTask is in tasks.js
+    });
+    row.appendChild(left);
+  }
+
+  // the → button (not shown in the last column)
+  if (position < COLUMN_ORDER.length - 1) {
+    const right = document.createElement("button");
+    right.className = "move-btn";
+    right.textContent = "\u2192";                   // →
+    right.setAttribute("aria-label", "Move to " + columnName(COLUMN_ORDER[position + 1]));
+    right.title = right.getAttribute("aria-label");
+    right.addEventListener("click", function () {
+      moveTask(task.id, COLUMN_ORDER[position + 1]);
+    });
+    row.appendChild(right);
+  }
+
+  card.appendChild(row);
+}
+
+// "doing" -> "Doing"
+function columnName(status) {
+  return { todo: "To Do", doing: "Doing", done: "Done" }[status];
+}
+
+
+// make one task card movable: by dragging, or with the arrow buttons
+// (called by createTaskCard in tasks.js)
 function makeCardDraggable(card, task) {
+  // Stage 9: the arrow buttons for phones and keyboards
+  addMoveButtons(card, task);
+
+  // Stage 9: play the fade-in animation only on a card that was JUST added.
+  // The board is redrawn after every change, so animating every card would make
+  // the whole board flicker. A task's id is the time it was created (Date.now()),
+  // so "created less than 1 second ago" means "just added".
+  if (Date.now() - task.id < 1000) {
+    card.classList.add("is-new");
+  }
+
   // course: draggable="true" in the HTML. Here we set it from JavaScript
   // because the cards are created by JavaScript.
   card.draggable = true;

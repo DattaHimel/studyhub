@@ -47,6 +47,14 @@ function drawChart() {
   // wipe the old drawing (course: clearRect)
   context.clearRect(0, 0, width, height);
 
+  // Stage 9: read the colours from the CSS variables, so the chart
+  // matches light and dark mode (a canvas can't use CSS directly)
+  // MODERN: getComputedStyle reads the final CSS values of an element
+  const styles = getComputedStyle(document.documentElement);
+  const textColor = styles.getPropertyValue("--text").trim();
+  const mutedColor = styles.getPropertyValue("--muted").trim();
+  const trackColor = styles.getPropertyValue("--column").trim();
+
   // count the tasks in each column (the tasks array lives in tasks.js)
   // MODERN: map() turns each bar into its count, giving e.g. [3, 1, 2]
   const counts = CHART_BARS.map(function (bar) {
@@ -60,7 +68,7 @@ function drawChart() {
 
   // nothing to show yet
   if (total === 0) {
-    context.fillStyle = "#6b7280";
+    context.fillStyle = mutedColor;
     context.textAlign = "center";
     context.fillText("Add a task to see your progress.", width / 2, height / 2);
     return;
@@ -68,7 +76,7 @@ function drawChart() {
 
   // the headline: "2 of 5 tasks done (40%)"
   const percent = Math.round((doneCount / total) * 100);
-  context.fillStyle = "#1f2937";
+  context.fillStyle = textColor;
   context.textAlign = "left";
   context.font = "600 16px Segoe UI, Roboto, Arial, sans-serif";
   context.fillText(`${doneCount} of ${total} tasks done (${percent}%)`, 0, 16);
@@ -89,12 +97,12 @@ function drawChart() {
     const y = top + i * (barHeight + gap);
 
     // the label on the left
-    context.fillStyle = "#374151";
+    context.fillStyle = textColor;
     context.textAlign = "left";
     context.fillText(bar.label, 0, y + barHeight / 2);
 
     // the light grey "track" behind the bar
-    context.fillStyle = "#eef0f7";
+    context.fillStyle = trackColor;
     context.fillRect(labelWidth, y, barAreaWidth, barHeight);
 
     // the coloured bar - its length depends on the count (course: fillRect)
@@ -103,7 +111,7 @@ function drawChart() {
     context.fillRect(labelWidth, y, barLength, barHeight);
 
     // the number on the right
-    context.fillStyle = "#1f2937";
+    context.fillStyle = textColor;
     context.textAlign = "right";
     context.fillText(counts[i], width, y + barHeight / 2);
   });
@@ -112,7 +120,7 @@ function drawChart() {
   context.beginPath();
   context.moveTo(labelWidth, top - 6);
   context.lineTo(labelWidth, top + 3 * (barHeight + gap) - gap + 6);
-  context.strokeStyle = "#9ca3af";
+  context.strokeStyle = mutedColor;
   context.lineWidth = 1;
   context.stroke();
 }
