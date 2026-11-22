@@ -1,0 +1,13 @@
+# Files Git should never upload
+
+# editor settings (personal to each computer)
+.vscode/
+
+# files Windows and macOS create by themselves
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# exported task files you download while testing
+studyhub-tasks-*.xml
+studyhub-tasks-*.json
